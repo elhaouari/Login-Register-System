@@ -9,6 +9,9 @@ class Login extends Controller{
     private $_remember;
     private $_errors = array();
 
+    const LENGTH_USERNAME = 4;
+    const LENGTH_PASSWORD = 8;
+
     public function __construct(array $data = null)
     {
         parent::__construct();
@@ -53,7 +56,7 @@ class Login extends Controller{
             {
                 $this->setEmail($username);
             }
-            else if (strlen($username) < 4) {
+            else if (strlen($username) < self::LENGTH_USERNAME) {
                 $this->_errors['username'] = 'Username must be atleast 4 characters.';
             }
             else {
@@ -67,7 +70,7 @@ class Login extends Controller{
     }
     public function setPassword($password)
     {
-        if (strlen($password) < 8) {
+        if (strlen($password) < self::LENGTH_PASSWORD) {
             $this->_errors['password'] = 'Password must be atleast 8 characters.';
         }
         else {

@@ -8,6 +8,9 @@ class Register extends Controller{
     private $_password;
     private $_errors = array();
 
+    const LENGTH_USERNAME = 4;
+    const LENGTH_PASSWORD = 8;
+
     public function __construct(array $data = null)
     {
         parent::__construct();
@@ -38,7 +41,7 @@ class Register extends Controller{
     {
         if (!empty($username))
         {
-            if (strlen($username) < 4) {
+            if (strlen($username) < self::LENGTH_USERNAME) {
                 $this->_errors['username'] = 'Username must be atleast 4 characters.';
             }
             else {
@@ -52,7 +55,7 @@ class Register extends Controller{
     }
     public function setPassword($password)
     {
-        if (strlen($password) < 8) {
+        if (strlen($password) < self::LENGTH_PASSWORD) {
             $this->_errors['password'] = 'Password must be atleast 8 characters.';
         }
         else {

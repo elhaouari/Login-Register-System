@@ -1,13 +1,17 @@
 <?php
 session_start();
 
-class Controller {
+abstract class Controller {
 
     protected $db;
 
     public function __construct()
     {
-        $this->db = new PDO('mysql:host=localhost;dbname=tuto', 'root', 'root');
+        $config = include 'config.php';
+        $this->db = new PDO('mysql:host='. $config['db_host'] .
+                            ';dbname='. $config['db_name'],
+                            $config['db_user'],
+                            $config['db_pass']);
     }
 
     public function view($view, $data = null)
